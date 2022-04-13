@@ -1,6 +1,6 @@
 const { expect } = require("chai");
 
-describe("Token contract", function () { 
+describe("Uniswap + ERC-20 Contracts", function () { 
     let TokenA, TokenB, WETH;
     let owner, addr1, addr2, addrs;
     let pether, fether;
