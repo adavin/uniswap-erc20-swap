@@ -2,7 +2,7 @@
  Minimal ERC-20 and UniswapV2 contracts with Hardhat + Mocha tests to deploy and swap tokens
 ### Setup
 ##### INIT_CODE_HASH
-The INIT_CODE_HASH is a keccak256 hash of the UniswapV2Pair bytecode/creationCode, which we need to insert into another file. 
+The INIT_CODE_HASH is a keccak256 hash of the UniswapV2Pair bytecode/creationCode, which we need to insert into another file.    
 Without it, the router will fail to correctly recognize our pairs that we can swap.
 
 Start by running:
