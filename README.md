@@ -1,31 +1,43 @@
 # uniswap-erc20-swap
  Minimal ERC-20 and UniswapV2 contracts with Hardhat + Mocha tests to deploy and swap tokens
+### Setup
+##### INIT_CODE_HASH
+The INIT_CODE_HASH is a keccak256 hash of the UniswapV2Pair bytecode/creationCode, which we need to insert into another file. 
+Without it, the router will fail to correctly recognize our pairs that we can swap.
 
-To get started:
-```npm install```
-
-Then run
+Start by running:
 ```npx hardhat console```   
+If you have any errors, you may need to perform ```npm install``` first.
 
 In the console, you can get the INIT_CODE_HASH by pasting the line below:    
 ```await ethers.utils.keccak256((await ethers.getContractFactory("UniswapV2Pair")).bytecode);```    
+
 You need to take this code and replace it on ```Line 24``` here:   
  ```contracts/uniswap/router/libraries/UniswapV2Library.sol```   
 ```hex'287e6e67abb0c5fd7516232cd525568659086b2849d8346d547856f04fee7f5c' // init code hash```   
 Remove the '0x' from your INIT_CODE_HASH and replace the old value on the Line 24.    
 If your bytecode for the UniswapV2Pair changes after compilation, you will need to update the init code, otherwise you will only need to do this once. 
 
-Close out the console.
-Now you can run   
-```npx hardhat test```   
+##### Running Test
+* To get started run: ```npm install```
+
+* Make sure your INIT_CODE_HASH is stored correctly
+
+* Now you can run ```npx hardhat test```   
 
 This will deploy 3 tokens (TokenA, TokenB, WETH), and deploy the Uniswap v2 Factory + Router, add/remove liquidity and perform swaps. 
 
 ### Notes
-We killed the deadline modifier in the Router contracts, so you can enter 0 for any calls to the Router that require the deadline modifier.   
-Deployment scripts have not been setup, but you can run the ```tests/main.js``` file to perform testing. 
+* There seems to be some issues with Hardhat and Node 17; using Node 16 or LTS version seems to work fine.
 
-Alternatively, if you have the correct init code hash in place, you could run ```npx hardhat console```  and then paste the commands below to achieve the same testing/deployment through the console. 
+* We killed the deadline modifier in the Router contracts, so you can enter 0 for any calls to the Router that require the deadline modifier.    
+
+* We also added a line to the Uniswap Factory, which can assist in retrieving the INIT_CODE_HASH in a different way than described above.   
+```bytes32 public constant INIT_CODE_HASH = keccak256(abi.encodePacked(type(UniswapV2Pair).creationCode));```   
+
+* Deployment scripts have not been setup, but you can run the ```tests/main.js``` file to perform testing. 
+
+* Alternatively, if you have the correct init code hash in place, you could run ```npx hardhat console```  and then paste the commands below to achieve the same testing/deployment through the console. 
 ```javascript
 const fether = ethers.utils.formatEther;
 const pether = ethers.utils.parseEther;
