@@ -3,7 +3,7 @@
 ### Setup
 ##### INIT_CODE_HASH
 The INIT_CODE_HASH is a keccak256 hash of the UniswapV2Pair bytecode/creationCode, which we need to insert into another file.    
-Without it, the router will fail to correctly recognize our pairs that we can swap.
+Without it, the router will fail to correctly recognize our created pair's contract.   
 
 Start by running:
 ```npx hardhat console```   
@@ -19,13 +19,13 @@ Remove the '0x' from your INIT_CODE_HASH and replace the old value on the Line 2
 If your bytecode for the UniswapV2Pair changes after compilation, you will need to update the init code, otherwise you will only need to do this once. 
 
 ### Running Test
-* To get started run: ```npm install```
+* To get started: ```npm install```
 
 * Make sure your INIT_CODE_HASH is stored correctly
 
-* Now you can run ```npx hardhat test```   
+* Run ```npm run test``` or ```npx hardhat test```    
 
-This will deploy 3 tokens (TokenA, TokenB, WETH), and deploy the Uniswap v2 Factory + Router, add/remove liquidity and perform swaps. 
+This will deploy 3 tokens (TokenA, TokenB, WETH), and deploy the Uniswap v2 Factory + Router, add/remove liquidity, and perform swaps. 
 
 ### Notes
 * There seems to be some issues with Hardhat and Node 17; using Node 16 or LTS version seems to work fine.
