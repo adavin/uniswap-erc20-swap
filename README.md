@@ -21,3 +21,6 @@ Now you can run
 
 This will deploy 3 tokens (TokenA, TokenB, WETH), and deploy the Uniswap v2 Factory + Router, add/remove liquidity and perform swaps. 
 
+### Notes
+We killed the deadline modifier in the Router contracts, so you can enter 0 for any calls to the Router that require the deadline modifier.   
+Deployment scripts have not been setup, but you can run the ```tests/main.js``` file to perform testing. 
