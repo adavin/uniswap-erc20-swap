@@ -18,7 +18,7 @@ You need to take this code and replace it on ```Line 24``` here:
 Remove the '0x' from your INIT_CODE_HASH and replace the old value on the Line 24.    
 If your bytecode for the UniswapV2Pair changes after compilation, you will need to update the init code, otherwise you will only need to do this once. 
 
-##### Running Test
+### Running Test
 * To get started run: ```npm install```
 
 * Make sure your INIT_CODE_HASH is stored correctly
